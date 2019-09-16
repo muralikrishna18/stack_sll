@@ -61,26 +61,26 @@ void push()
         exit (0);
     }
     newnode->data=ele;
+    newnode->next=NULL;
     
     if(top==NULL)
     {
-         top->min=ele;
-          top->max=ele;
+        newnode->min=ele;
+        newnode->max=ele;
         top=newnode;
         
         
         //newnode->next=NULL;
         
     }
+    
     else
     {
-        if(ele>top->data)
-        newnode->max=ele;
-        if(ele<top->data)
-        newnode->min=ele;
-        newnode->next=top;
-        top=newnode;
-    }
+        newnode->min=ele<top->min?ele:top->min;
+        newnode->max=ele>top->max?ele:top->max;
+         newnode->next=top;
+         top=newnode;
+    } 
     
     
 }
@@ -112,44 +112,32 @@ void display()
     do
     {
         printf("%d \t",temp->data);
+        printf("%d \t",temp->min);
+        printf("%d \n",temp->max);
     }while((temp=temp->next)!=NULL);
 }
 void min()
 {
-    int min;
+    
     if(top==NULL)
     {
         printf("stack empty cant display");
         exit(0);
     }
-    /*else
-    min=top->data;
-    struct node *temp;
-    temp=top;
-    do
-    {
-        min=(min>temp->data?temp->data:min);
-    
-    }while((temp=temp->next)!=NULL);*/
+   
     printf("min element in stack %d",top->min);
     
 }
 void max()
 {
-    int max;
+    
     if(top==NULL)
     {
         printf("stack empty cant display");
         exit(0);
     }
     else
-    /*max=top->data;
-    struct node *temp;
-    do
-    {
-        max=max<temp->data?temp->data:max;
-    
-    }while((temp=temp->next)!=NULL);*/
+   
     printf("max element in stack %d",top->max);
     
     
